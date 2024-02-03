@@ -1,0 +1,29 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: infraapi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: infraapi
+  template:
+    metadata:
+      name: infraapi
+      labels:
+        app: infraapi
+    spec:      
+      containers:
+      - name: infraapi
+        env:
+        - name: ApiAddress
+          value: http://infraapi-service:5000/WeatherForecast
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        image: 1234567890.dkr.ecr.us-east-1.amazonaws.com/infraapi:latest
+        ports:
+        - containerPort: 5000
+        imagePullPolicy: Always
+        resources: {}

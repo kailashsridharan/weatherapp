@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: infraapi-service
+  labels:
+    app: infraapi
+spec:
+  type: ClusterIP
+  selector:
+    app: infraapi
+  ports:
+  - protocol: TCP
+    name: ui
+    port: 5000
+    targetPort: 5000
